@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
 import Pizza from "./Pizza";
-
-const intl = new Intl.NumberFormat("us-US", {
-  style: "currency",
-  currency: "USD",
-});
+import currencySign from "./utils/currencySign";
 
 export default function Order() {
   const [pizzaType, setPizzaType] = useState("pepperoni");
@@ -15,7 +11,8 @@ export default function Order() {
   let price, selectedPizza;
   if (!loading) {
     selectedPizza = pizzaTypes.find((pizza) => pizzaType === pizza.id);
-    price = intl.format(
+    console.log("\nselectedPizza:", selectedPizza);
+    price = currencySign("en-US", "USD").format(
       selectedPizza.sizes ? selectedPizza.sizes[pizzaSize] : "",
     );
   }
