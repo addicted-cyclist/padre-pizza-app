@@ -1,9 +1,5 @@
 import { usePizzaOfTheDay } from "./custom-hooks/usePizzaOfTheDay";
-
-const currency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+import currencySign from "./utils/currencySign";
 
 export default function PizzaOfTheDay() {
   const pizzaOfTheDay = usePizzaOfTheDay();
@@ -20,7 +16,10 @@ export default function PizzaOfTheDay() {
           <h3>{pizzaOfTheDay.name}</h3>
           <p>{pizzaOfTheDay.description}</p>
           <p className="pizza-of-the-day-price">
-            From: <span>{currency.format(pizzaOfTheDay.sizes.S)}</span>
+            From:{" "}
+            <span>
+              {currencySign("en-US", "USD").format(pizzaOfTheDay.sizes.S)}
+            </span>
           </p>
         </div>
         <img
